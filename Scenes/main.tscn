@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2vwn7x6wsqx"]
+
+[ext_resource type="Texture2D" uid="uid://dyf4qm44bmn0o" path="res://icon.svg" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://c65xg4ii1iri3" path="res://Scripts/PlayerMovement.gd" id="2_bo1nx"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_bo1nx"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(161, 91)
+texture = ExtResource("1_jjgbg")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(636, 228)
+script = ExtResource("2_bo1nx")
+speed = 350
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(21.250004, 22.750002)
+scale = Vector2(43.500008, 46.500004)
+texture = SubResource("CanvasTexture_bo1nx")
