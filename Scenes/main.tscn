@@ -1,22 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2vwn7x6wsqx"]
+[gd_scene load_steps=6 format=3 uid="uid://d2vwn7x6wsqx"]
 
-[ext_resource type="Texture2D" uid="uid://dyf4qm44bmn0o" path="res://icon.svg" id="1_jjgbg"]
-[ext_resource type="Script" uid="uid://c65xg4ii1iri3" path="res://Scripts/PlayerMovement.gd" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://b1n5a8hrgitd4" path="res://Scripts/Camera/ChasePlayer.gd" id="2_8gbba"]
+[ext_resource type="Script" uid="uid://c65xg4ii1iri3" path="res://Scripts/Player/PlayerMovement.gd" id="2_bo1nx"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_bo1nx"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjgbg"]
+size = Vector2(45, 48)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_8gbba"]
+
 [node name="Node2D" type="Node2D"]
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(161, 91)
-texture = ExtResource("1_jjgbg")
-
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(636, 228)
 script = ExtResource("2_bo1nx")
-speed = 350
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(21.250004, 22.750002)
 scale = Vector2(43.500008, 46.500004)
 texture = SubResource("CanvasTexture_bo1nx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_jjgbg")
+debug_color = Color(0.973368, 0, 0.437854, 0.41960785)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_8gbba")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(327.25, 61)
+scale = Vector2(-218.5, 144)
+texture = SubResource("CanvasTexture_8gbba")
