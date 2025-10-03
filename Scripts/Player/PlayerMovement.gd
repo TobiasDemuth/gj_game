@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var rotationSpeed: float = 8;
 var rotationDirection: Vector2 = Vector2.ZERO
 
-@export var dashSpeed: float = 350;
+@export var dashSpeed: float = 300;
 @export var dashDeceleration: float = 1500;
 @export var dashDuration: float = 0.8;
 var dashDirection: Vector2 = Vector2.ZERO

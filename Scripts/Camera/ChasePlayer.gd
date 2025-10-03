@@ -1,6 +1,6 @@
 extends Camera2D
 
-@onready var target: CharacterBody2D = get_node("../Player")
+@export var target: CharacterBody2D
 @export var chaseSpeed: float = 5
 @export var camToPlayerOffset: Vector2 = Vector2.ZERO
 
