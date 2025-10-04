@@ -13,7 +13,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_8gbba"]
 radius = 22.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_6bp64"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_8gbba"]
 vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)])
@@ -25,7 +25,7 @@ texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
-1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_6bp64")
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_8gbba")
 
 [sub_resource type="TileSet" id="TileSet_kry3j"]
 tile_size = Vector2i(32, 32)
@@ -57,13 +57,11 @@ scale = Vector2(2, 2)
 script = ExtResource("2_bo1nx")
 player = NodePath("..")
 
-[node name="PlayerHealth" type="Node2D" parent="Player" node_paths=PackedStringArray("target")]
+[node name="PlayerHealth" type="Node2D" parent="Player"]
 script = ExtResource("2_6bp64")
-target = NodePath("..")
 
-[node name="PlayerCombat" type="Node2D" parent="Player" node_paths=PackedStringArray("enemyHealth")]
+[node name="PlayerCombat" type="Node2D" parent="Player"]
 script = ExtResource("3_344ge")
-enemyHealth = NodePath("../../Enemy/EnemyHealth")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("2_8gbba")
@@ -88,21 +86,19 @@ texture = ExtResource("4_jjvhh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 shape = SubResource("CircleShape2D_jjvhh")
 
-[node name="EnemyHealth" type="Node2D" parent="Enemy" node_paths=PackedStringArray("target")]
-script = ExtResource("2_6bp64")
-target = NodePath("..")
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Enemy"]
+path_max_distance = 1000.0
+debug_enabled = true
 
-[node name="EnemyAI" type="Node2D" parent="Enemy" node_paths=PackedStringArray("enemy", "player")]
-script = ExtResource("4_kry3j")
-enemy = NodePath("..")
-player = NodePath("../../Player")
-
-[node name="Timer" type="Timer" parent="Enemy/EnemyAI"]
+[node name="Timer" type="Timer" parent="Enemy"]
 wait_time = 0.1
 autostart = true
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Enemy/EnemyAI"]
-path_max_distance = 500.0
-debug_enabled = true
+[node name="EnemyHealth" type="Node2D" parent="Enemy"]
+script = ExtResource("2_6bp64")
 
-[connection signal="timeout" from="Enemy/EnemyAI/Timer" to="Enemy/EnemyAI" method="_on_timer_timeout"]
+[node name="EnemyAI" type="Node2D" parent="Enemy" node_paths=PackedStringArray("player")]
+script = ExtResource("4_kry3j")
+player = NodePath("../../Player")
+
+[connection signal="timeout" from="Enemy/Timer" to="Enemy" method="_on_timer_timeout"]
